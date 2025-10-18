@@ -77,18 +77,18 @@
 </div>
 
 <script>
-    // ESTE CÓDIGO USA O SHIELDS.IO PARA IGNORAR PROBLEMAS DE DNS/REDE
-    const NAMESPACE = 'pesquisa-pdf-gratis'; 
-    const KEY = 'visitantes-unicos';
+    // ESTE CÓDIGO USA O HITS.SEEYOU.DEV: API robusta que retorna o número em JSON simples.
+    const NAMESPACE = 'miguelgamescamp-pdf'; 
+    const KEY = 'unique-visitors';
     
-    // URL que o Shields.io usará para obter o contador (proxy estável)
-    const shieldsUrl = `https://img.shields.io/count/v1/badges?namespace=${NAMESPACE}&key=${KEY}&label=Acessos&color=0aa2c0&style=flat`;
+    // URL da API que irá contar a visita e retornar o número
+    const hitsUrl = `https://hits.seeyou.dev/api/count/hit?url=github.com/${NAMESPACE}/${KEY}&json=true`;
 
-    fetch(shieldsUrl)
+    fetch(hitsUrl)
         .then(response => response.json())
         .then(data => {
-            // O valor do contador está na propriedade "value" da resposta JSON
-            const countValue = data.value || '0'; 
+            // O valor do contador está na propriedade "value" (ou "total") dependendo da API
+            const countValue = data.value || data.total || '0'; 
             document.getElementById('contador-numero').innerText = countValue.toLocaleString('pt-BR');
         })
         .catch(error => {
