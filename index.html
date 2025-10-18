@@ -34,33 +34,16 @@
             color: #2c3e50;
             margin-bottom: 20px;
         }
+        /* Remove o display do contador visual que falhou */
         .contador-display {
-            font-size: 20px;
-            color: #666;
-            margin: 25px 0;
-            padding: 15px;
-            border: 2px solid #0aa2c0;
-            border-radius: 8px;
-            background-color: #e6f7fa;
+            display: none; 
         }
-        #contador-numero {
-            font-size: 48px;
-            font-weight: bold;
-            color: #0aa2c0; /* Cor do contador */
-            display: block; 
-            margin-bottom: 5px;
-        }
-        /* ESTILO PARA AVISAR QUE A CONTAGEM É MANUAL */
-        .manual-update {
-            font-size: 14px;
-            color: #e74c3c;
-            margin-top: 10px;
-        }
+        
         .btn-acesso {
             display: block;
             width: 80%;
             padding: 15px 30px;
-            margin: 30px auto 10px;
+            margin: 50px auto 10px; /* Aumenta margem sem o contador */
             background-color: #e74c3c; 
             color: white;
             text-decoration: none;
@@ -79,19 +62,28 @@
 
 <div class="container">
     <h1>Documento de Pesquisa Final</h1>
-    <p>Baixe o arquivo PDF completo e confira o total de acessos únicos:</p>
+    <p>Clique abaixo para baixar o arquivo completo.</p>
 
-    <div class="contador-display">
-        <span id="contador-numero">0</span> 
-        <span style="font-size: 14px; color: #777;">pessoas acessaram este documento (Únicas)</span>
-        <div class="manual-update">Atualizado manualmente via Google Analytics</div>
-    </div>
-
-    <a href="https://docs.google.com/spreadsheets/d/1ycPzz1Mw7dylkRGDqkBJj7B0OoqdGbBM/edit?usp=sharing&ouid=107411067002152538962&rtpof=true&sd=true" class="btn-acesso" target="_blank">
+    <a href="https://docs.google.com/spreadsheets/d/1ycPzz1Mw7dylkRGDqkBJj7B0OoqdGbBM/edit?usp=sharing&ouid=107411067002152538962&rtpof=true&sd=true" 
+       class="btn-acesso" 
+       id="pdf-download-link" 
+       target="_blank">
         BAIXAR PDF COMPLETO
     </a>
 
 </div>
+
+<script>
+    // RASTREIA O CLIQUE NO BOTÃO E ENVIA O EVENTO PARA O GA4
+    document.getElementById('pdf-download-link').addEventListener('click', function() {
+        if (typeof gtag === 'function') {
+            gtag('event', 'download_pdf', {
+                'event_category': 'downloads',
+                'event_label': 'pdf_pesquisa_completa'
+            });
+        }
+    });
+</script>
 
 </body>
 </html>
