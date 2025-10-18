@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documento de Pesquisa Final</title>
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK69ZY5VVS"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-ZK69ZY5VVS');
-    </script>
-    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,7 +25,7 @@
             color: #2c3e50;
             margin-bottom: 20px;
         }
-        /* Remove o display do contador visual que falhou */
+        /* Remove o bloco do contador visual que falhou */
         .contador-display {
             display: none; 
         }
@@ -43,7 +34,7 @@
             display: block;
             width: 80%;
             padding: 15px 30px;
-            margin: 50px auto 10px; /* Aumenta margem sem o contador */
+            margin: 50px auto 10px;
             background-color: #e74c3c; 
             color: white;
             text-decoration: none;
@@ -62,26 +53,52 @@
 
 <div class="container">
     <h1>Documento de Pesquisa Final</h1>
-    <p>Clique abaixo para baixar o arquivo completo.</p>
-
-    <a href="https://docs.google.com/spreadsheets/d/1ycPzz1Mw7dylkRGDqkBJj7B0OoqdGbBM/edit?usp=sharing&ouid=107411067002152538962&rtpof=true&sd=true" 
+    <p>Clique abaixo para baixar o arquivo completo e registrar seu acesso.</p>
+    
+    <button 
        class="btn-acesso" 
-       id="pdf-download-link" 
-       target="_blank">
+       id="pdf-download-button">
         BAIXAR PDF COMPLETO
-    </a>
+    </button>
 
 </div>
 
 <script>
-    // RASTREIA O CLIQUE NO BOTÃO E ENVIA O EVENTO PARA O GA4
-    document.getElementById('pdf-download-link').addEventListener('click', function() {
-        if (typeof gtag === 'function') {
-            gtag('event', 'download_pdf', {
-                'event_category': 'downloads',
-                'event_label': 'pdf_pesquisa_completa'
-            });
-        }
+    // ✅ LINK DE ENVIO: CORRETO
+    const FORM_ACTION_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSf2gJsj_O3eipN2jWrYp-QVKj-V1KQ7EJwCS_b5FoEpxoUDTg/formResponse'; 
+    
+    // ✅ CÓDIGO DE ENTRADA: CORRETO E ENCONTRADO
+    const ENTRY_CODE = 'entry.1166318556'; 
+    
+    // Link final do PDF
+    const PDF_URL = 'https://docs.google.com/spreadsheets/d/1ycPzz1Mw7dylkRGDqkBJj7B0OoqdGbBM/edit?usp=sharing&ouid=107411067002152538962&rtpof=true&sd=true';
+
+    document.getElementById('pdf-download-button').addEventListener('click', function() {
+        
+        // 1. GERA UM REGISTRO DE DATA E HORA
+        const timestamp = new Date().toLocaleString('pt-BR');
+        
+        // 2. CONSTRÓI OS DADOS PARA ENVIAR À PLANILHA
+        const data = new FormData();
+        data.append(ENTRY_CODE, timestamp); 
+
+        // 3. ENVIA OS DADOS PARA A PLANILHA (ASSÍNCRONO - não bloqueia a navegação)
+        fetch(FORM_ACTION_URL, {
+            method: 'POST',
+            body: data,
+            mode: 'no-cors' 
+        })
+        .then(response => {
+            console.log('Registro de clique enviado com sucesso.', response);
+        })
+        .catch(error => {
+            console.error('Erro ao registrar o clique:', error);
+        });
+
+        // 4. ABRE O PDF IMEDIATAMENTE APÓS ENVIAR O DADO
+        setTimeout(() => {
+            window.open(PDF_URL, '_blank');
+        }, 100); 
     });
 </script>
 
