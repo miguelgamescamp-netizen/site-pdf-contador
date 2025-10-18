@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documento de Pesquisa Final</title>
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK69ZY5VVS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZK69ZY5VVS');
+    </script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,21 +42,20 @@
             border: 2px solid #0aa2c0;
             border-radius: 8px;
             background-color: #e6f7fa;
-            /* Flexbox para centralizar o texto e a imagem */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
-        #contador-imagem {
-            /* Estilo para garantir que o número da imagem seja grande */
-            width: 100%;
-            height: auto;
-            max-width: 150px; 
-            margin: 5px 0;
+        #contador-numero {
+            font-size: 48px;
+            font-weight: bold;
+            color: #0aa2c0; /* Cor do contador */
             display: block; 
+            margin-bottom: 5px;
         }
-        
+        /* ESTILO PARA AVISAR QUE A CONTAGEM É MANUAL */
+        .manual-update {
+            font-size: 14px;
+            color: #e74c3c;
+            margin-top: 10px;
+        }
         .btn-acesso {
             display: block;
             width: 80%;
@@ -71,16 +79,12 @@
 
 <div class="container">
     <h1>Documento de Pesquisa Final</h1>
-    <p>Baixe o arquivo PDF completo e confira o total de acessos:</p>
+    <p>Baixe o arquivo PDF completo e confira o total de acessos únicos:</p>
 
     <div class="contador-display">
-        <img id="contador-imagem" 
-             src="https://counter2.optimizermagazine.com/hit.php?id=miguelpereiracontador&color=white" 
-             alt="Contador de Acessos">
-        
-        <span style="font-size: 14px; color: #777; margin-top: 10px;">
-            pessoas visitaram este documento (Aproximado)
-        </span>
+        <span id="contador-numero">0</span> 
+        <span style="font-size: 14px; color: #777;">pessoas acessaram este documento (Únicas)</span>
+        <div class="manual-update">Atualizado manualmente via Google Analytics</div>
     </div>
 
     <a href="https://docs.google.com/spreadsheets/d/1ycPzz1Mw7dylkRGDqkBJj7B0OoqdGbBM/edit?usp=sharing&ouid=107411067002152538962&rtpof=true&sd=true" class="btn-acesso" target="_blank">
