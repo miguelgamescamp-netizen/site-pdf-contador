@@ -77,20 +77,23 @@
 </div>
 
 <script>
-    // Este código faz a contagem de acessos ÚNICOS (por IP/sessão)
-    const NAMESPACE = 'pesquisa-pdf-gratis'; // Identificador único da sua contagem
+    // ESTE CÓDIGO USA O SHIELDS.IO PARA IGNORAR PROBLEMAS DE DNS/REDE
+    const NAMESPACE = 'pesquisa-pdf-gratis'; 
     const KEY = 'visitantes-unicos';
-    const url = `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`;
+    
+    // URL que o Shields.io usará para obter o contador (proxy estável)
+    const shieldsUrl = `https://img.shields.io/count/v1/badges?namespace=${NAMESPACE}&key=${KEY}&label=Acessos&color=0aa2c0&style=flat`;
 
-    fetch(url)
+    fetch(shieldsUrl)
         .then(response => response.json())
         .then(data => {
-            // Formata o número para o padrão brasileiro (ex: 1.234)
-            document.getElementById('contador-numero').innerText = data.value.toLocaleString('pt-BR');
+            // O valor do contador está na propriedade "value" da resposta JSON
+            const countValue = data.value || '0'; 
+            document.getElementById('contador-numero').innerText = countValue.toLocaleString('pt-BR');
         })
         .catch(error => {
             console.error('Erro ao carregar o contador:', error);
-            document.getElementById('contador-numero').innerText = '0'; // Mostra 0 se houver erro
+            document.getElementById('contador-numero').innerText = '0'; 
         });
 </script>
 
