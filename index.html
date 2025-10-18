@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Pesquisa e Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f0f3f6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .contador-display {
+            font-size: 20px;
+            color: #666;
+            margin: 25px 0;
+            padding: 15px;
+            border: 2px solid #0aa2c0;
+            border-radius: 8px;
+            background-color: #e6f7fa;
+        }
+        #contador-numero {
+            font-size: 48px;
+            font-weight: bold;
+            color: #0aa2c0; /* Cor do contador */
+            display: block; 
+            margin-bottom: 5px;
+        }
+        .btn-acesso {
+            display: block;
+            width: 80%;
+            padding: 15px 30px;
+            margin: 30px auto 10px;
+            background-color: #e74c3c; /* Vermelho para download */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-acesso:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Documento de Pesquisa Final</h1>
+    <p>Baixe o arquivo PDF completo e confira o total de acessos únicos:</p>
+
+    <div class="contador-display">
+        <span id="contador-numero">A contar...</span>
+        <span style="font-size: 14px; color: #777;">pessoas acessaram este documento</span>
+    </div>
+
+    <a href="[https://docs.google.com/spreadsheets/d/1ycPzz1Mw7dylkRGDqkBJj7B0OoqdGbBM/edit?usp=sharing&ouid=107411067002152538962&rtpof=true&sd=true]" class="btn-acesso" target="_blank">
+        BAIXAR PDF COMPLETO
+    </a>
+
+</div>
+
+<script>
+    // Este código faz a contagem de acessos ÚNICOS (por IP/sessão)
+    const NAMESPACE = 'pesquisa-pdf-gratis'; // Identificador único da sua contagem
+    const KEY = 'visitantes-unicos';
+    const url = `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Formata o número para o padrão brasileiro (ex: 1.234)
+            document.getElementById('contador-numero').innerText = data.value.toLocaleString('pt-BR');
+        })
+        .catch(error => {
+            console.error('Erro ao carregar o contador:', error);
+            document.getElementById('contador-numero').innerText = '0'; // Mostra 0 se houver erro
+        });
+</script>
+
+</body>
+</html>
