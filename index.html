@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Pesquisa e Download</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=[SEU ID DE MEDIÇÃO GA4 AQUI]"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZK69ZY5VVS');
+    </script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,12 +50,18 @@
             display: block; 
             margin-bottom: 5px;
         }
+        /* ESTILO PARA AVISAR QUE A CONTAGEM É MANUAL */
+        .manual-update {
+            font-size: 14px;
+            color: #e74c3c;
+            margin-top: 10px;
+        }
         .btn-acesso {
             display: block;
             width: 80%;
             padding: 15px 30px;
             margin: 30px auto 10px;
-            background-color: #e74c3c; /* Vermelho para download */
+            background-color: #e74c3c; 
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -66,8 +82,9 @@
     <p>Baixe o arquivo PDF completo e confira o total de acessos únicos:</p>
 
     <div class="contador-display">
-        <span id="contador-numero">A contar...</span>
-        <span style="font-size: 14px; color: #777;">pessoas acessaram este documento</span>
+        <span id="contador-numero">0</span> 
+        <span style="font-size: 14px; color: #777;">pessoas acessaram este documento (Únicas)</span>
+        <div class="manual-update">Atualizado manualmente via Google Analytics</div>
     </div>
 
     <a href="https://docs.google.com/spreadsheets/d/1ycPzz1Mw7dylkRGDqkBJj7B0OoqdGbBM/edit?usp=sharing&ouid=107411067002152538962&rtpof=true&sd=true" class="btn-acesso" target="_blank">
@@ -75,27 +92,6 @@
     </a>
 
 </div>
-
-<script>
-    // ESTE CÓDIGO USA O HITS.SEEYOU.DEV: API robusta que retorna o número em JSON simples.
-    const NAMESPACE = 'miguelgamescamp-pdf'; 
-    const KEY = 'unique-visitors';
-    
-    // URL da API que irá contar a visita e retornar o número
-    const hitsUrl = `https://hits.seeyou.dev/api/count/hit?url=github.com/${NAMESPACE}/${KEY}&json=true`;
-
-    fetch(hitsUrl)
-        .then(response => response.json())
-        .then(data => {
-            // O valor do contador está na propriedade "value" (ou "total") dependendo da API
-            const countValue = data.value || data.total || '0'; 
-            document.getElementById('contador-numero').innerText = countValue.toLocaleString('pt-BR');
-        })
-        .catch(error => {
-            console.error('Erro ao carregar o contador:', error);
-            document.getElementById('contador-numero').innerText = '0'; 
-        });
-</script>
 
 </body>
 </html>
